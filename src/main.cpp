@@ -39,7 +39,7 @@
 #include <libgen.h>
 
 // Necessary to compile on OS X
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 using namespace std;
 #include "asciiportal.h"

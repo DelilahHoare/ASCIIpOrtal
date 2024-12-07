@@ -41,7 +41,7 @@ using namespace std;
 #include "ap_draw.h"
 
 #ifndef __NOSDL__
-#include "SDL/SDL.h"
+#include <SDL.h>
 #include "pdcsdl.h"
 #endif
 
@@ -573,17 +573,9 @@ void graphics_init (bool fullscreen, int height, int width, bool usePureAscii)
 {
   pureAscii = usePureAscii;
 #ifndef __NOSDL__
-#ifdef __GP2X__
-  pdc_screen = SDL_SetVideoMode(320, 200, 16, SDL_SWSURFACE | (SDL_FULLSCREEN * fullscreen));
-#else
-#ifdef __DINGOO__
-  pdc_screen = SDL_SetVideoMode(320, 200, 16, SDL_SWSURFACE | (SDL_FULLSCREEN * fullscreen));
-#else
   SDL_Init( SDL_INIT_EVERYTHING );
   if (fullscreen) width = height = 0; // use current resolution
-  pdc_screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE | (SDL_FULLSCREEN * fullscreen));
-#endif
-#endif
+  pdc_window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_FULLSCREEN * fullscreen);
   SDL_JoystickOpen( 0 );
 #endif
 

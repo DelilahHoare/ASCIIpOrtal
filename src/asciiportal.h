@@ -44,12 +44,6 @@
 #ifndef __NOSOUND__
 //#define __NOSOUND__
 #endif
-#ifndef __DINGOO__
-//#define __DINGOO__
-#endif
-#ifndef __GP2X__
-//#define __GP2X__
-#endif
 
 unsigned long long int get_microseconds();
 

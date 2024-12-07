@@ -36,7 +36,7 @@ using namespace std;
 #include "ap_play.h"
 
 #ifndef __NOSDL__
-#include "SDL/SDL.h"
+#include <SDL.h>
 #endif
 #ifndef __NOSOUND__
 #include "ap_sound.h"

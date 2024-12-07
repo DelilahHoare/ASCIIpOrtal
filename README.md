@@ -1,5 +1,12 @@
 # ASCIIpOrtal
 
+## SDL 2 Port
+
+This is ASCIIpOrtal for SDL 2.  This does not compile with SDL 1.  The Dingoo and GP2X ports are removed.
+The input handler has been rewritten and feels a bit different to the original.  Unfortunately, the original is basically unusable under SDL 2 (even sdl12-compat).  Try it and you'll see what I mean.
+
+## Original readme follows
+
 **By Joe Larson**
 
 **Sound Design by Steve Fenton.**

@@ -34,11 +34,11 @@ PORT = example
 
 # Custom C flags: you may define ('-D') or unset ('-U') macros to get your specific
 # code to work.
-#CXXFLAGS := $(CXXFLAGS) -I/usr/example -D__NOSDL__ -D__NOSOUND__ -U__DINGOO__ -U__GP2X__
+#CXXFLAGS := $(CXXFLAGS) -I/usr/example -D__NOSDL__ -D__NOSOUND__
 
 # Custom link flags: either dynamic (default) or static linking (see the last form,
 # 'man ld' for details).
-#LINKFLAGS := $(LINKFLAGS) `sdl-config --libs` -L/usr/lib -l SDL_mixer -l :libpdcurses.a
+#LINKFLAGS := $(LINKFLAGS) `pkg-config --libs sdl2 sdl2_mixer` -L/usr/lib -l :libpdcurses.a
 
 # Additional files to be included in release tarball.
 #FILES_INCLUDE_DIST := $(FILES_INCLUDE_DIST) custom_readme.txt example.dll foo/bar.xml

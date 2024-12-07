@@ -284,6 +284,7 @@ int MapPack::load_map() {
   lvl.aimobject.tick = 0;
   lvl.aimobject.d.x = 1;
   lvl.aimobject.d.y = 0;
+  lvl.aimdelay = ERR;
 
   vector<int> blankline(maxwidth + 2, NONSTICK); // one extra line to start
   lvl.map.push_back(blankline);

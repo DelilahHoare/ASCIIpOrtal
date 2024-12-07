@@ -127,6 +127,7 @@ struct level {
 
   ObjectManager objm;
   object aimobject;
+  int aimdelay;
   Pager pager;
 
   // Statistics

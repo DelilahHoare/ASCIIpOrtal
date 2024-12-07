@@ -11,9 +11,9 @@ PORT = default
 ### Custom variables ###
 
 PDCURSES_DIR = PDCurses-$(PDCURSES_VER)
-PDCURSES_VER = 3.4
+PDCURSES_VER = 3.9
 
-YAML-CPP_VER = 0.5.3
+YAML-CPP_VER = 0.7.0
 
 ### Customisable variables ###
 
@@ -26,10 +26,10 @@ YAML-CPP_VER = 0.5.3
 #DISTNAME := $(DISTNAME)-$(PORT)
 
 # This should pick up the local version of pdcurses_SDL
-CXXFLAGS := $(CXXFLAGS) -I yaml-cpp/include -I ./$(PDCURSES_DIR) -I ./$(PDCURSES_DIR)/sdl1 `sdl-config --cflags` -U__NOSDL__ -U__NOSOUND__ -U__DINGOO__ -U__GP2X__
+CXXFLAGS := $(CXXFLAGS) -std=c++11 -I yaml-cpp/include -I ./$(PDCURSES_DIR) -I ./$(PDCURSES_DIR)/sdl2 `pkg-config --cflags sdl2 sdl2_mixer` -U__NOSDL__ -U__NOSOUND__
 
 # Custom link flags
-LINKFLAGS := -L yaml-cpp $(LINKFLAGS) $(PDCURSES_DIR)/sdl1/libpdcurses.a `sdl-config --libs` -L/usr/lib -l SDL_mixer
+LINKFLAGS := -L yaml-cpp $(LINKFLAGS) $(PDCURSES_DIR)/sdl2/pdcurses.a `pkg-config --libs sdl2 sdl2_mixer` -L/usr/lib
 
 # Additional files to be included in release tarball.
 #FILES_INCLUDE_DIST := $(FILES_INCLUDE_DIST) custom_readme.txt example.dll foo/bar.xml
@@ -80,7 +80,7 @@ all:
 	$(CXX) -c $(CXXFLAGS) $<
 
 # Replace by OBJECTS_NOSOUND if needed
-$(EXE_NAME): yaml-cpp/libyaml-cpp.a $(PDCURSES_DIR)/sdl1/libpdcurses.a $(OBJECTS)
+$(EXE_NAME): yaml-cpp/libyaml-cpp.a $(PDCURSES_DIR)/sdl2/pdcurses.a $(OBJECTS)
 	$(CXX) $^ $(LINKFLAGS) -o $@
 	@echo
 	@echo "[*] $(EXE_NAME) successfully built."
@@ -150,14 +150,14 @@ source:
 debian-source: $(TARBALL_SRC)
 	cp $(TARBALL_SRC) asciiportal_1.3.orig.tar.gz
 
-$(PDCURSES_DIR)/sdl1/libpdcurses.a: $(PDCURSES_DIR)
+$(PDCURSES_DIR)/sdl2/pdcurses.a: $(PDCURSES_DIR)
 	cd `dirname $@` && make libs
 
 $(PDCURSES_DIR): PDCurses-$(PDCURSES_VER).tar.gz
 	tar xvfz $<
 
 PDCurses-$(PDCURSES_VER).tar.gz:
-	wget http://sourceforge.net/projects/pdcurses/files/pdcurses/$(PDCURSES_VER)/PDCurses-$(PDCURSES_VER).tar.gz
+	wget -O $@ https://github.com/wmcbrine/PDCurses/archive/refs/tags/$(PDCURSES_VER).tar.gz
 
 
 yaml-cpp/libyaml-cpp.a: yaml-cpp
@@ -166,7 +166,7 @@ yaml-cpp/libyaml-cpp.a: yaml-cpp
 
 yaml-cpp: yaml-cpp-$(YAML-CPP_VER).tar.gz
 	tar xvfz $<
-	mv yaml-cpp-release-$(YAML-CPP_VER) yaml-cpp
+	mv yaml-cpp-yaml-cpp-$(YAML-CPP_VER) yaml-cpp
 
 yaml-cpp-$(YAML-CPP_VER).tar.gz:
-	wget -O $@ https://github.com/jbeder/yaml-cpp/archive/release-$(YAML-CPP_VER).tar.gz
+	wget https://github.com/jbeder/yaml-cpp/archive/refs/tags/$@

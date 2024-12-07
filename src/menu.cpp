@@ -36,7 +36,7 @@
 #include "menu.h"
 
 #ifndef __NOSDL__
-#include "SDL/SDL.h"
+#include <SDL.h>
 #endif
 #ifndef __NOSOUND__
 #include "ap_sound.h"
@@ -76,43 +76,6 @@ void wfillsquare(WINDOW* win, int y1, int x1, int height, int width) {
 
 void help_menu () {
   int maxwidth = 0;
-#ifdef __DINGOO__
-  int numkeys = 13;
-  string keys[] = {
-    " How to play ASCIIpOrtal ",
-    "=========================",
-    "Use the following keys:",
-    "Left/Right ........ Move Left/Right",
-    "Up/Down ........... Move Up/Down Ladders",
-    "                    or adjust aim.",
-    "R Shoulder/A....... Fire Blue Portal",
-    "L Shoulder/Y....... Fire Yellow Portal",
-    "B ................. Fire 'Next' Portal",
-    "X ................. Cancel Portals",
-    "",
-    "Start ............. Menu",
-    "Select ............ Portal View Options"
-  };
-#else
-#ifdef __GP2X__
-  int numkeys = 12;
-  string keys[] = {
-    " How to play ASCIIpOrtal ",
-    "=========================",
-    "Use the following keys:",
-    "Left/Right ........ Move Left/Right",
-    "Up/Down ........... Move Up/Down Ladders",
-    "                    or adjust aim.",
-    "L Shoulder/A....... Fire Blue Portal",
-    "R Shoulder/B....... Fire Yellow Portal",
-    "X/Y ............... Fire 'Next' Portal",
-    "",
-    "Vol up ............ Game Speed Up",
-    "Vol down .......... Game Speed Down",
-    "Start ............. Menu",
-    "Select ............ Portal View Options"
-  };
-#else
   int numkeys = 18;
   string keys[] = {
     " How to play ASCIIpOrtal ",
@@ -135,8 +98,6 @@ void help_menu () {
     "R ................. Restart Level",
     "M ................. Toggle music"
   };
-#endif
-#endif
 
 
   setblocking(true);
